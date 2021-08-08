@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<style>
+    .login {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+</style>
+
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+    {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+    {% else %}
+        <p>Please login to see this page.</p>
+    {% endif %}
+    {% endif %}
+
+    <div class="login">
+        <form method="POST" action="/do_login/">
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">{{ form.username.label_tag }}</span>
+                <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="basic-addon1" required>
+            </div>
+            
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">{{ form.password.label_tag }}</span>
+                <input type="password" name="password" class="form-control" placeholder="password" aria-describedby="basic-addon1" required>
+            </div>
+            <input type="text" hidden name="ip" id="ip">
+            <input type="submit" disabled id="submit" class="btn btn-primary" style="margin: 10px 0px" value="login" />
+        </form>
+    </div>
+
+<script>
+    let ip;
+    document.getElementById("submit").addEventListener('click', (ev) => {
+        let ipField = document.getElementById("ip");
+        ipField.value = ip;
+    })
+    window.onload = getIpAddress();
+    function getIpAddress() {
+        fetch("https://ifconfig.me/ip").then(res => {
+            res.text().then(text => {
+                ip = text;
+                document.getElementById("submit").removeAttribute("disabled");
+            });
+        });
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+1. Install python2 from https://www.python.org/downloads/release/python-2718/
+2. open a terminal in this directory (project directory)
+3. Enter the following command:
+    pip install -r requirements.txt
+4. Install docker from https://www.docker.com/get-started
+5. Install docker-compose from https://docs.docker.com/compose/install/
+6. Enter the following command: (if fails try with sudo)
+    docker-compose up
+7. Enter the following command:
+    python manage.py runserver 0.0.0.0:3600
+8. Open web browser and navigate to localhost:3600. A login screen will appear.
+9. Enter in username: "abhisar" and enter the password: "abhisar1234", without the quotes.
+10. Now the dashboard view will open up.
+11. Click on the upload button present on the left side.
+12. Click on browse button and select any valid Nessus csv scan export.(For example use My_Basic_Network_Scan_rii1lb.csv file present in the project directory)
+13. Click on upload button.
+14. Click on complete button.
+15. Now this can be used to triage risks based on the policies set by organization/company.
